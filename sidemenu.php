@@ -33,18 +33,21 @@
       <ul class="sidebar-menu">        
         <!-- Optionally, you can add icons to the links -->                
         <li class="treeview">
+		  <a href="project_details.php"> <span>Project details</span>            
+          </a>
           <a href=""><i class="fa fa-link"></i> <span>Home</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
           </a>
           <ul class="treeview-menu">
-             <li><a href="">Project Information</a> </li>                                        
-                                        <li><a href="">Spall Received</a> </li>
-                                        <li><a href="">Crushing/Production</a> </li>
-                                        <li><a href="">Breakdown</a> </li>
-                                        <li><a href="">Maintainance</a> </li>
+             <li><a href="project_info.php">Project Information</a> </li>                                        
+             <li><a href="spall.php">Spall Received</a> </li>
+             <li><a href="crushing.php">Crushing/Production</a> </li>
+             <li><a href="breakdown.php">Breakdown</a> </li>
+             <li><a href="maintainance.php">Maintainance</a> </li>
           </ul>
+
         </li>
       </ul>
       <!-- /.sidebar-menu -->

@@ -4940,3 +4940,9 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+
+
+.form_content{
+	padding-left:100px;
+	padding-right:100px;
+}

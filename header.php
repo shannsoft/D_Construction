@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-
+<?php
+	include "connection_string.php";
+?>
+	
 <html>
 <head>
 	<meta charset="utf-8">
@@ -14,10 +17,11 @@
 	<!-- Ionicons -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
 	<!-- Theme style -->
-	<link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+	<link rel="stylesheet" href="dist/css/AdminLTE.css">
 
 	<link rel="stylesheet" href="dist/css/skins/skin-blue.min.css">
-
+	<link rel="stylesheet" href="plugins/datepicker/datepicker3.css">
+	
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
