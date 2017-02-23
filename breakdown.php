@@ -4,6 +4,22 @@ include "sidemenu.php";
 $project_id = $_REQUEST['id'];
 $result = mysql_query("Select * from tbl_proj_info where PROJ_ID= ".$project_id);
 $row = mysql_fetch_array($result);
+
+if(isset($_POST['btn_add'])){
+	$bd_type = $_REQUEST['bd_type'];
+	$for_hrs = $_REQUEST['for_hrs'];
+	$bd_nature = $_REQUEST['natureofbd'];
+
+	$insertsql = ("INSERT INTO `tbl_breakdown` (`BD_PROJ_ID`, `BD_BD_ID`, `BD_HRS`, `BD_NAT`) VALUES ($project_id , $bd_type , $for_hrs ,  $bd_nature);");
+	$queryinsert = mysql_query($insertsql);	
+	
+	if ($queryinsert){
+		echo"<script language=\"javascript\">
+		alert(\"Success!\");
+		document.location=\"project_details.php\";
+		</script>";
+	}	
+}	
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -19,27 +35,28 @@ $row = mysql_fetch_array($result);
     <section class="content form_content">
 
       <!-- Your Page Content Here -->
-    <form action="" method="post">
+    <form method="post">
 		<div class="form-group">			
-			<label for="BD_type">Breakdown Type</label> 
-			<select class="form-control" id="triptype">
+			<label for="bd_type">Breakdown Type</label> 
+			<select class="form-control" id="bd_type" name="bd_type">
 				<option>Breakdown Type</option>
 				<?php
-				$result=mysql_query("Select * from enm_breakdown_type");
-				while ($row=mysql_fetch_array($result)) {
-					 echo"<option value='" . $row['BD_ID'] ."'>" . $row['BD_NAME']."</option>";
-				
-				}					
+					$result=mysql_query("Select * from enm_breakdown_type");
+					while ($row=mysql_fetch_array($result)) {
+				?>					 
+					<option value="<?php echo $row['BD_ID']?>"><?php echo $row['BD_NAME']?></option>
+				<?php
+					}					
 				?>
 			</select>					
 		</div>
 		<div class="form-group">
-			<label for="forHrs">For hours</label>
-			<input type="text" class="form-control" id="for_hrs" placeholder="For Hours">
+			<label for="for_hrs">For hours</label>
+			<input type="number" class="form-control" id="for_hrs" name="for_hrs" placeholder="For Hours">
 		</div>
 		<div class="form-group">
-			<label for="natureofBd">Nature of Breakdown</label>
-			<textarea type="text"  class="form-control" name="natureofbreakdown" placeholder="Nature of Breakdown">
+			<label for="natureofbd">Nature of Breakdown</label>
+			<textarea type="text"  class="form-control" id="natureofbd" name="natureofbd" placeholder="Nature of Breakdown">
 			</textarea></br>
 		</div>	
 		<div class="">			  

@@ -4,6 +4,21 @@ include "sidemenu.php";
 $project_id = $_REQUEST['id'];
 $result = mysql_query("Select * from tbl_proj_info where PROJ_ID= ".$project_id);
 $row = mysql_fetch_array($result);
+
+if(isset($_POST['btn_add'])){
+	$m_type = $_REQUEST['mtype'];
+	$m_desc = $_REQUEST['desc'];
+
+	$insertsql = ("INSERT INTO `tbl_maintenance` (`MAIN_PROJ_ID`, `MAIN_MT_ID`, `MAIN_DESC`) VALUES ($project_id , $m_type , $m_desc);");
+	$queryinsert = mysql_query($insertsql);	
+	
+	if ($queryinsert){
+		echo"<script language=\"javascript\">
+		alert(\"Success!\");
+		document.location=\"project_details.php\";
+		</script>";
+	}	
+}	
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -19,10 +34,10 @@ $row = mysql_fetch_array($result);
     <section class="content form_content">
 
       <!-- Your Page Content Here -->
-    <form action="" method="post">
+    <form method="post">
 		<div class="form-group">
-			<label for="BD_type">Maintainance Type</label> 
-			<select class="form-control" id="triptype">
+			<label for="mtype">Maintainance Type</label> 
+			<select class="form-control" id="mtype" name="mtype">
 				<option>Maintainance Type</option>
 				<?php
 				$result=mysql_query("Select * from enm_maintenance_type");
@@ -35,7 +50,7 @@ $row = mysql_fetch_array($result);
 		</div>
 		<div class="form-group">	
 			<label for="desc">Description</label>
-			<textarea type="text"  class="form-control" name="desc" placeholder="Description">
+			<textarea type="text"  class="form-control" id="desc" name="desc" placeholder="Description">
 			</textarea></br>
 		</div>	
 		<div class="">			  
