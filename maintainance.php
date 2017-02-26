@@ -9,7 +9,7 @@ if(isset($_POST['btn_add'])){
 	$m_type = $_REQUEST['mtype'];
 	$m_desc = $_REQUEST['desc'];
 
-	$insertsql = ("INSERT INTO `tbl_maintenance` (`MAIN_PROJ_ID`, `MAIN_MT_ID`, `MAIN_DESC`) VALUES ($project_id , $m_type , $m_desc);");
+	$insertsql = ("INSERT INTO `tbl_maintenance` (`MAIN_PROJ_ID`, `MAIN_MT_ID`, `MAIN_DESC`) VALUES ('$project_id' ,'$m_type' , '$m_desc');");
 	$queryinsert = mysql_query($insertsql);	
 	
 	if ($queryinsert){
@@ -55,6 +55,7 @@ if(isset($_POST['btn_add'])){
 		</div>	
 		<div class="">			  
                 <button type="submit" name="btn_add" class="btn btn-primary">Submit</button>
+				<a class="btn btn-danger" href="report_input.php" type="submit" name="btn_add1">Report<a>
         </div>
 	</form>
   </div>	

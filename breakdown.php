@@ -9,9 +9,9 @@ if(isset($_POST['btn_add'])){
 	$bd_type = $_REQUEST['bd_type'];
 	$for_hrs = $_REQUEST['for_hrs'];
 	$bd_nature = $_REQUEST['natureofbd'];
-
-	$insertsql = ("INSERT INTO `tbl_breakdown` (`BD_PROJ_ID`, `BD_BD_ID`, `BD_HRS`, `BD_NAT`) VALUES ($project_id , $bd_type , $for_hrs ,  $bd_nature);");
-	$queryinsert = mysql_query($insertsql);	
+	
+	$insertsql = "INSERT INTO `tbl_breakdown` (`bd_proj_id`, `bd_bd_id`, `bd_hrs`, `bd_nat`) VALUES ('$project_id', '$bd_type', '$for_hrs', '$bd_nature')";
+	$queryinsert = mysql_query($insertsql,$connection);	
 	
 	if ($queryinsert){
 		echo"<script language=\"javascript\">
@@ -61,6 +61,7 @@ if(isset($_POST['btn_add'])){
 		</div>	
 		<div class="">			  
                 <button type="submit" name="btn_add" class="btn btn-primary">Submit</button>
+				<a class="btn btn-danger" href="report_input.php" type="submit" name="btn_add1">Report<a>
         </div>
 	</form>
   </div>	

@@ -47,13 +47,13 @@ $result = mysql_query("Select * from tbl_proj_info");
 										<td><?php echo $row[PROJ_NAME] ?></td>
 										<td><?php echo $row[PROJ_ADDR] ?></td>
 										<td> 
-											<a class="btn btn-sm btn-info" href="spall.php?id=<?php echo $row['PROJ_ID']?>">
+											<a data-toggle="tooltip" title="Spall" class="btn btn-sm btn-info" href="spall.php?id=<?php echo $row['PROJ_ID']?>">
 											<i class="fa fa-wa fa-industry" aria-hidden="true"></i><a>
-											<a class="btn btn-sm btn-success" href="crushing.php?id=<?php echo $row['PROJ_ID']?>">
+											<a data-toggle="tooltip" title="Crushing" class="btn btn-sm btn-success" href="crushing.php?id=<?php echo $row['PROJ_ID']?>">
 											<i class="fa fa-wa fa-cogs" aria-hidden="true"></i><a>
-											<a class="btn btn-sm btn-warning" href="breakdown.php?id=<?php echo $row['PROJ_ID']?>">
+											<a data-toggle="tooltip" title="Breakdown" class="btn btn-sm btn-warning" href="breakdown.php?id=<?php echo $row['PROJ_ID']?>">
 											<i class="fa fa-wa fa-yelp" aria-hidden="true"></i><a>
-											<a class="btn btn-sm btn-danger" href="maintainance.php?id=<?php echo $row['PROJ_ID']?>">
+											<a data-toggle="tooltip" title="Maintenance" class="btn btn-sm btn-danger" href="maintainance.php?id=<?php echo $row['PROJ_ID']?>">
 											<i class="fa fa-wa fa-wrench" aria-hidden="true"></i><a>
 										</td>
 									</tr>
@@ -61,6 +61,7 @@ $result = mysql_query("Select * from tbl_proj_info");
 							</thead>
 						</table>
 					</div>
+					
 				</div>
 			</div>
 		</section>
@@ -68,6 +69,7 @@ $result = mysql_query("Select * from tbl_proj_info");
     </section>	           
     <!-- /.content -->
   </div>
+
 <?php
 	include "footer.php";
 ?>

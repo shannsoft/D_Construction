@@ -45,9 +45,7 @@ if(isset($_POST['btn_add'])){
 
               <div class="">			  
                 <button type="submit" name="btn_add" class="btn btn-primary">Submit</button>
-              </div>
-			 
-           
+              </div>         
     </form>
   </div>	
     </section>
