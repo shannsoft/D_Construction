@@ -73,7 +73,7 @@ if(isset($_POST['btn_add'])){
 			</div>
 			
 			<div class="form-group">
-				<label for="date"> <small>from </small></label>
+				<label for="date"> <small>date </small></label>
 					<div class="input-group date">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
@@ -96,7 +96,7 @@ if(isset($_POST['btn_add'])){
 	$(function () {	
 		//Date picker
 		$('#date').datepicker({
-			autoclose: true
+			autoclose: true,
 			format: 'yyyy-mm-dd'
 		});
 	});
