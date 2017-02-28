@@ -16,12 +16,9 @@ $result = mysql_query("Select * from tbl_proj_info");
 		</div>
     </section>
 			<!-- /.box-header -->
-			<div class="box-body">
+	<div class="box-body">
     <!-- Main content -->
     <section class="content form_content">
-
-
-
 		<!-- Your Page Content Here -->
 
 		<section class="content">

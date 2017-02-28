@@ -45,6 +45,15 @@ if(isset($_POST['btn_add'])){
     <form method="post">	
 		<div class="box-body">
 			<div class="form-group">
+				<div class="radio">
+				  <label><input type="radio" name="optradio">Wight bridge</label>
+				</div>
+				<div class="radio">
+				  <label><input type="radio" name="optradio">Cubic meter</label>
+				</div>
+			</div>
+			
+			<div class="form-group">
 				<label for="TripType">Trip Type</label> 
 					<select class="form-control" id="triptype" name="triptype">
 					<option>Trip Type</option>

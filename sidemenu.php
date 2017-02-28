@@ -35,6 +35,8 @@
         <li class="treeview">
 		  <a href="project_details.php"> <span>Project details</span>            
           </a>
+		  <a href="vehicle_details.php"> <span>Vehicle details</span>            
+          </a>
           <a href=""><i class="fa fa-link"></i> <span>Home</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
