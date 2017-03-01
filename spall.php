@@ -7,26 +7,21 @@ $row = mysql_fetch_array($result);
 
 if(isset($_POST['btn_add'])){
 	$s_trip_type = $_REQUEST['triptype'];
-	$s_no_trips = $_REQUEST['no_of_trips'];
-	$s_date = $_REQUEST['date'];
-	$s_trip_type = $_REQUEST['triptype'];
-	
-	$result1 = mysql_query("Select * from enm_trip_type where TRIP_ID= ".$s_trip_type);
-	$row1 = mysql_fetch_array($result1);
-	
-	$qty_of_trip = $row1['TRIP_QTY'];
-	$total_qty = $qty_of_trip * $s_no_trips;
-	echo $s_no_trips;
-	echo $qty_of_trip;
-	echo $total_qty;
-	$insertsql = ("INSERT INTO `tbl_spl_rcvd` (`SPL_PROJ_ID`, `SPL_TRIP_TYPE`, `SPL_NO_OF_TRIP`, `SPL_QTY_OF_TRIP`, `SPL_TOT_QTY`, `SPL_DATE`) VALUES ('$project_id', '$s_trip_type', '$s_no_trips', '$qty_of_trip' , '$total_qty' , '$s_date');");
+	$linearray = explode(', ', $s_trip_type);
+	$s_v_id = $_REQUEST['v_no'];
+	$s_no_trips = $_REQUEST['no_of_trips'];	
+	$s_qty = $_GET['total_qty'];
+	$s_date = $_GET['todaydate'];
+	echo $s_v_id;
+	echo $s_qty;
+	/* $insertsql = ("INSERT INTO `tbl_spl_rcvd` (`SPL_PROJ_ID`, `SPL_V_ID`, `SPL_NO_OF_TRIP`, `SPL_TOT_QTY`, `SPL_DATE`) VALUES ('$project_id', '$linearray[0]', '$s_v_id' , '$s_no_trips' , '$s_qty' , '$s_date');");
 	$queryinsert = mysql_query($insertsql);	
 	if ($queryinsert){
 		echo"<script language=\"javascript\">
 		alert(\"Success!\");
 		document.location=\"project_details.php\";
 		</script>";
-	}	
+	}	 */
 }	
 
 ?>
@@ -44,33 +39,38 @@ if(isset($_POST['btn_add'])){
     <!-- Your Page Content Here -->
     <form method="post">	
 		<div class="box-body">
-			<div class="form-group">
+			<div class="form-group">				
 				<div class="radio">
-				  <label><input type="radio" name="optradio">Wight bridge</label>
+				  <input type="radio" onchange="hideCubic(this)" value="weight" name="optradio" checked>Wight bridge
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">Cubic meter</label>
+				  <input type="radio" onchange="hideCubic(this)" value="cubic" name="optradio">Cubic meter
 				</div>
 			</div>
 			
 			<div class="form-group">
 				<label for="TripType">Trip Type</label> 
-					<select class="form-control" id="triptype" name="triptype">
+					<select class="form-control" id="triptype" name="triptype" onchange="get_tripid(this.value)">
 					<option>Trip Type</option>
 					<?php
 						$result = mysql_query("Select * from enm_trip_type");
 						while ($row = mysql_fetch_array($result)) {
 					?>
-						<option value="<?php echo $row['TRIP_ID']?>"><?php echo $row['TRIP_NAME']?></option>
+						<option value="<?php echo $row['TRIP_ID'],', ',$row['TRIP_QTY'];?>"><?php echo $row['TRIP_NAME']?></option>
 					<?php
 						}					
 					?>
 					</select>
 			</div>
-
+			<div class="form-group">
+				<label for="TripType">Vehicle No.</label> 
+				<select class="form-control" id="v_no" name="v_no">
+					<option>Vehicle no.</option>
+				</select>
+			</div>
 			<div class="form-group">
 				<label for="NoOfTrip">No of Trips</label>
-				<input type="text" class="form-control" id="no_of_trips" name="no_of_trips" placeholder="No of trips">
+				<input disabled type="text" class="form-control" id="no_of_trips" name="no_of_trips" value="1" placeholder="No of trips">
 			</div>
 			<div class="form-group">			
 				<label for="QtyOfTrip">Quantity of trips</label>
@@ -78,16 +78,17 @@ if(isset($_POST['btn_add'])){
 			</div>
 			<div class="form-group">			
 				<label for="TotalQty">Total Quantity</label>
-				<input disabled type="number" class="form-control" id="total_qty" placeholder="Total Quantity">
-			</div>
-			
+				<input type="number" class="form-control" id="total_qty" placeholder="Total Quantity">
+			</div>			
 			<div class="form-group">
 				<label for="date"> <small>date </small></label>
 					<div class="input-group date">
 						<div class="input-group-addon">
 							<i class="fa fa-calendar"></i>
 						</div>
-						<input type="text" name="date" class="form-control pull-right" id="date">
+						<?php $now = new DateTime();
+						?>
+						<input disabled type="text" class="form-control pull-right" id="todaydate" value="<?php echo $now->format('Y-m-d') ?>">
 					</div>		
 			</div>
 			<div class="">			  
@@ -102,6 +103,9 @@ if(isset($_POST['btn_add'])){
 ?>	
 
 <script type="text/javascript">
+ var trip_quantity;
+ var quantity_type = 'weight';
+ var total_quantity = 0;
 	$(function () {	
 		//Date picker
 		$('#date').datepicker({
@@ -109,5 +113,41 @@ if(isset($_POST['btn_add'])){
 			format: 'yyyy-mm-dd'
 		});
 	});
-	
+	function hideCubic(x) {
+	  quantity_type = x.value;
+	  if(x.value == "weight"){
+		$('#total_qty').attr("disabled",false);
+		$('#total_qty').val('');
+	  }
+	  else{
+		$('#total_qty').attr("disabled",true);
+		$('#total_qty').val(total_quantity.toFixed(2));
+	  }
+	 }
+	 function get_tripid(id){
+		 var idArray = id.split(', ');
+		 total_quantity =  idArray[1]*2.2;
+		 if(quantity_type == 'cubic'){
+			$('#total_qty').val(total_quantity.toFixed(2));
+		 }
+		 else{
+			$('#total_qty').val(''); 
+		 }
+		 $('#qty_of_trips').val(idArray[1]);
+		 $('#v_no').html('');
+		 $('#v_no').append('<option>Vehicle no.</option>');
+		$.ajax({
+			type: "GET",
+			url: "function.php",
+			data: "triptype=" + idArray[0],
+			success: function(result) {
+				var vehicle_list = JSON.parse(result);
+				for(i = 0; i < vehicle_list.length; i++){
+					$('#v_no').append('<option value="'+vehicle_list[i].v_id+'">'+vehicle_list[i].v_no+'</option>');
+				}
+			}
+		});
+		
+	 }
+
 </script>
