@@ -10,18 +10,18 @@ if(isset($_POST['btn_add'])){
 	$linearray = explode(', ', $s_trip_type);
 	$s_v_id = $_REQUEST['v_no'];
 	$s_no_trips = $_REQUEST['no_of_trips'];	
-	$s_qty = $_GET['total_qty'];
-	$s_date = $_GET['todaydate'];
-	echo $s_v_id;
-	echo $s_qty;
-	/* $insertsql = ("INSERT INTO `tbl_spl_rcvd` (`SPL_PROJ_ID`, `SPL_V_ID`, `SPL_NO_OF_TRIP`, `SPL_TOT_QTY`, `SPL_DATE`) VALUES ('$project_id', '$linearray[0]', '$s_v_id' , '$s_no_trips' , '$s_qty' , '$s_date');");
+	$s_qty = $_REQUEST['total_qty'];
+	$s_date = $_REQUEST['todaydate'];
+	$insertsql = ("INSERT INTO `tbl_spl_rcvd` (`SPL_PROJ_ID`, `SPL_V_ID`, `SPL_NO_OF_TRIP`, `SPL_TOT_QTY`, `SPL_DATE`) VALUES ('$project_id', '$s_v_id' , '$s_no_trips', '$s_qty', '$s_date');");
+	echo $insertsql;
 	$queryinsert = mysql_query($insertsql);	
 	if ($queryinsert){
 		echo"<script language=\"javascript\">
 		alert(\"Success!\");
 		document.location=\"project_details.php\";
 		</script>";
-	}	 */
+	}
+	$_REQUEST = $_POST = $_GET = NULL;	
 }	
 
 ?>
@@ -70,15 +70,15 @@ if(isset($_POST['btn_add'])){
 			</div>
 			<div class="form-group">
 				<label for="NoOfTrip">No of Trips</label>
-				<input disabled type="text" class="form-control" id="no_of_trips" name="no_of_trips" value="1" placeholder="No of trips">
+				<input type="text" readOnly class="form-control" id="no_of_trips" value="<?php echo 1?>" name="no_of_trips" placeholder="No of trips">
 			</div>
 			<div class="form-group">			
 				<label for="QtyOfTrip">Quantity of trips</label>
-				<input disabled type="number" class="form-control" id="qty_of_trips" placeholder="Quantity of trips">
+				<input readOnly type="number" class="form-control" name="qty_of_trips" id="qty_of_trips" placeholder="Quantity of trips">
 			</div>
 			<div class="form-group">			
 				<label for="TotalQty">Total Quantity</label>
-				<input type="number" class="form-control" id="total_qty" placeholder="Total Quantity">
+				<input type="number" class="form-control" name="total_qty" id="total_qty" placeholder="Total Quantity">
 			</div>			
 			<div class="form-group">
 				<label for="date"> <small>date </small></label>
@@ -88,12 +88,12 @@ if(isset($_POST['btn_add'])){
 						</div>
 						<?php $now = new DateTime();
 						?>
-						<input disabled type="text" class="form-control pull-right" id="todaydate" value="<?php echo $now->format('Y-m-d') ?>">
+						<input readOnly type="text" class="form-control pull-right" id="todaydate" name="todaydate" value="<?php echo $now->format('Y-m-d') ?>">
 					</div>		
 			</div>
 			<div class="">			  
                 <button type="submit" name="btn_add" class="btn btn-primary">Submit</button>			
-				<a class="btn btn-danger" href="spall_report.php" type="submit" name="btn_add1">Report<a>
+				<a class="btn btn-danger" href="spall_daily_report.php?id=<?php echo $project_id?>" type="submit" name="btn_add1">Daily Report<a>
             </div>
 	</form>
 </section>
@@ -116,11 +116,11 @@ if(isset($_POST['btn_add'])){
 	function hideCubic(x) {
 	  quantity_type = x.value;
 	  if(x.value == "weight"){
-		$('#total_qty').attr("disabled",false);
+		$('#total_qty').attr("readOnly",false);
 		$('#total_qty').val('');
 	  }
 	  else{
-		$('#total_qty').attr("disabled",true);
+		$('#total_qty').attr("readOnly",true);
 		$('#total_qty').val(total_quantity.toFixed(2));
 	  }
 	 }
