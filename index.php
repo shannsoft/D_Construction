@@ -23,6 +23,7 @@
 	$u_password = $_REQUEST['password'];
 	$result = mysql_query("SELECT * FROM tbl_user WHERE user_name = '$u_name' and user_password = '$u_password'");
 	$row  = mysql_fetch_array($result);
+	session_start();
 	if(is_array($row)) {
 		$_SESSION["user_id"] = $row[user_id];
 		$_SESSION["user_name"] = $row[user_name];
@@ -32,13 +33,13 @@
 	}
 	if(isset($_SESSION["user_id"])) {
 	echo"<script language=\"javascript\">
-		alert(\"Welcome!\");
+		;
 		document.location=\"project_details.php\";
 		</script>";
 	}
-?>
 	
 ?>
+	
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">

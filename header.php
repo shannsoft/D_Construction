@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <?php
 	include "connection_string.php";
+	session_start();
+	 if(!isset($_SESSION['user_name']))
+		{
+		   header("location: index.php ");
+		}
+	else {
+		$user_name = $_SESSION['user_name']; 
+	}
 ?>
 	
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Project</title>
+	<title>DConstruction</title>
 	<!-- Tell the browser to be responsive to screen width -->
 	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 	<!-- Bootstrap 3.3.6 -->
@@ -60,7 +68,7 @@
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="images/admin" class="img-circle" alt="User Image">
+                        <img src="images/admin.jpg" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -113,7 +121,7 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="logout.php"  class="btn btn-default btn-flat">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -122,3 +130,5 @@
       </div>
     </nav>
   </header>
+  
+  

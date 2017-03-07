@@ -16,4 +16,20 @@ function getVehicleList($tripID){
 	echo json_encode($data);
 }
 
+if($_GET['logout'])
+{
+    session_start();
+    //remove PHPSESSID from browser
+    if ( isset( $_COOKIE[session_name()] ) )
+    setcookie( session_name(), "", time()-3600, "/" );
+    //clear session from globals
+    $_SESSION = array();
+    //clear session from disk
+    echo session_destroy() ? "Successfully Logged Out";
+    exit;
+	echo"<script language=\"javascript\">
+		;
+		document.location=\"index.php\";
+		</script>";
+}
 ?>

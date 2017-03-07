@@ -2,6 +2,7 @@
 include "header.php";
 include "sidemenu.php";
 $result = mysql_query("Select * from tbl_proj_info");
+$ctr = 1;
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -40,7 +41,7 @@ $result = mysql_query("Select * from tbl_proj_info");
 								</tr>
 								<?php while ($row = mysql_fetch_array($result)){?>									
 									<tr>
-										<td><?php echo $row[PROJ_ID] ?></td>
+										<td><?php echo $ctr ?></td>
 										<td><?php echo $row[PROJ_NAME] ?></td>
 										<td><?php echo $row[PROJ_ADDR] ?></td>
 										<td> 
@@ -54,7 +55,7 @@ $result = mysql_query("Select * from tbl_proj_info");
 											<i class="fa fa-wa fa-wrench" aria-hidden="true"></i><a>
 										</td>
 									</tr>
-								<?php } ?>
+								<?php $ctr = $ctr + 1; } ?>
 							</thead>
 						</table>
 					</div>
