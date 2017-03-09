@@ -93,7 +93,8 @@ if(isset($_POST['btn_add'])){
 			</div>
 			<div class="">			  
                 <button type="submit" name="btn_add" class="btn btn-primary">Submit</button>			
-				<a class="btn btn-danger" href="spall_daily_report.php?id=<?php echo $project_id?>" type="submit" name="btn_add1">Daily Report<a>
+				<a class="btn btn-danger" href="spall_daily_report.php?id=<?php echo $project_id?>" type="submit" name="btn_add1">Daily Report</a>
+				<a class="btn btn-warning" href="spallHSD_report.php?id=<?php echo $project_id?>" type="submit" name="btn_add2"> HSD Report</a>
             </div>
 	</form>
 </section>
